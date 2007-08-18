@@ -6,7 +6,7 @@
 Summary:	A module that fix MS XP WebDAV client problem
 Name:		apache-%{mod_name}
 Version:	0.2.1
-Release:	%mkrel 5
+Release:	%mkrel 6
 Group:		System/Servers
 License:	GPL
 URL:		http://www.luluware.com/mod_auth_msfix.html
@@ -22,8 +22,6 @@ Requires:	apache-conf >= 2.2.0
 Requires:	apache >= 2.2.0
 BuildRequires:  apache-devel >= 2.2.0
 BuildRequires:	file
-Provides:	apache2-mod_auth_msfix
-Obsoletes:	apache2-mod_auth_msfix
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -58,9 +56,6 @@ install -d %{buildroot}%{_sysconfdir}/httpd/modules.d
 install -m0755 .libs/*.so %{buildroot}%{_libdir}/apache-extramodules/
 install -m0644 %{mod_conf} %{buildroot}%{_sysconfdir}/httpd/modules.d/%{mod_conf}
 
-install -d %{buildroot}%{_var}/www/html/addon-modules
-ln -s ../../../..%{_docdir}/%{name}-%{version} %{buildroot}%{_var}/www/html/addon-modules/%{name}-%{version}
-
 %post
 if [ -f %{_var}/lock/subsys/httpd ]; then
     %{_initrddir}/httpd restart 1>&2;
@@ -81,6 +76,3 @@ fi
 %doc CHANGES INSTALL README mod_auth_msfix.html
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/%{mod_conf}
 %attr(0755,root,root) %{_libdir}/apache-extramodules/%{mod_so}
-%{_var}/www/html/addon-modules/*
-
-
