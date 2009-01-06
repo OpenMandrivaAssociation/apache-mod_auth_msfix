@@ -6,7 +6,7 @@
 Summary:	A module that fix MS XP WebDAV client problem
 Name:		apache-%{mod_name}
 Version:	0.2.1
-Release:	%mkrel 10
+Release:	%mkrel 11
 Group:		System/Servers
 License:	GPL
 URL:		http://www.luluware.com/mod_auth_msfix.html
