@@ -1,0 +1,46 @@
+--- mod_auth_msfix.c	2003-11-26 12:08:51.000000000 +0100
++++ mod_auth_msfix.c.oden	2005-12-15 20:33:48.000000000 +0100
+@@ -103,14 +103,14 @@
+  */
+ typedef struct {
+ 	const char	*match;
+-	regex_t		*compiled;
++	ap_regex_t	*compiled;
+ 	const char	*replace;
+ } rewrite_entry;                                        // rewrite_entry
+ 
+ typedef struct {
+ 	const char	*header;
+ 	const char	*match;
+-	regex_t		*compiled;
++	ap_regex_t	*compiled;
+ } matches_entry;                                        // matches_entry
+ 
+ typedef struct {
+@@ -220,7 +220,7 @@
+ 		r->replace  = arg2;
+ 		r->compiled = ap_pregcomp( cmd->pool, 	// Compile regex
+ 			arg1,
+-			REG_EXTENDED|REG_ICASE );
++			AP_REG_EXTENDED|AP_REG_ICASE );
+ 		if( r->compiled == NULL )		// Did it compile? No?
+ 		     return apr_psprintf( cmd->pool, "In MATCHES: unable to compile pattern %s", 
+ 				     arg1 );
+@@ -254,7 +254,7 @@
+ 		else{
+ 		r->compiled = ap_pregcomp( cmd->pool, 	// Compile regex
+ 			arg2,
+-			REG_EXTENDED|REG_ICASE );
++			AP_REG_EXTENDED|AP_REG_ICASE );
+ 		if( r->compiled == NULL )		// Did it compile? No?
+ 		     return apr_psprintf( cmd->pool, "In OnHeader: unable to compile pattern %s", 
+ 				     arg2);
+@@ -296,7 +296,7 @@
+  */
+ static int auth_msfix_handler(request_rec *r)
+ {
+-	regmatch_t pmatch[ 10 ];
++	ap_regmatch_t pmatch[ 10 ];
+ 
+ 	int i, found = 0;
+ 	const char *t;
