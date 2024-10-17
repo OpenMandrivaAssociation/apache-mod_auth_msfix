@@ -9,7 +9,7 @@ Version:	0.2.1
 Release:	17
 Group:		System/Servers
 License:	GPL
-URL:		http://www.luluware.com/mod_auth_msfix.html
+URL:		https://www.luluware.com/mod_auth_msfix.html
 Source0:	%{mod_name}-%{version}.tar.bz2
 Source1:	%{mod_conf}
 Patch0:		mod_auth_msfix-0.2.1-apache220.diff
